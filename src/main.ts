@@ -1,24 +1,35 @@
 import './style/style.css'
-import typescriptLogo from './assets/typescript.svg'
-import viteLogo from './assets/vite.svg'
 import { setupCounter } from './counter.ts'
+import { Card } from './models/Card.ts'
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+const gameArea = document.querySelector<HTMLDivElement>('#app')!
+
+gameArea.innerHTML = `
   <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
+    <h1>Kano's Cards</h1>
     <div class="card">
       <button id="counter" type="button"></button>
+      <button id="pull-card" type="button"></button>
     </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
   </div>
 `
 
+
 setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+
+function setupPullCard(): void{
+  const pullCard = () =>{
+    console.log("Pulling an Ace of Spades");
+    const card = new Card("A", "Ace", "spades", 11, "none", "none", "Base");
+    document.querySelector<HTMLDivElement>("#app")!.appendChild(card.toHTML());
+  }
+  
+  const cardButton = document.querySelector<HTMLButtonElement>("#pull-card")!;
+  cardButton.innerHTML = "Pull Card";
+  cardButton.addEventListener("click", pullCard);
+
+}
+
+setupPullCard();
+
+
