@@ -32,7 +32,30 @@ export class Deck implements DeckInterface{
                 cards.push(card);
             }
         }
+        if (this.deckBuilder.numJokers && this.deckBuilder.numJokers > 0){
+            for (let i = 0; i < this.deckBuilder.numJokers; i++){
+                let card = new Card('Joker', 'Joker', 'Joker', 0);
+                cards.push(card);
+            }
+        }
         return cards;
+    }
+
+    pullCard(): Card{
+        const card = this.cards.pop() as Card;
+        return card;
+    }
+
+    shuffle = (): void => {
+        let originalCards: Card[]= [...this.cards];
+        let shuffledCards: Card[] = [];
+        while (originalCards.length > 0){
+            let randomIndex: number = Math.floor(Math.random() * (originalCards.length));
+            let card: Card = originalCards[randomIndex];
+            shuffledCards.push(card);
+            originalCards.splice(randomIndex, 1);
+        }
+        this.cards = [...shuffledCards];
     }
     
 };

@@ -1,4 +1,3 @@
-import { Deck } from "./Deck";
 import { Card } from "./Card";
 
 export interface CardInterface {
@@ -15,6 +14,7 @@ export interface DeckBuilderInterface {
     name: string;
     suits: string[];
     ranksNamesChips: {[key: string]: [name: string, chipValue: number]};
+    numJokers?: number;
 }
 
 export interface DeckInterface {
